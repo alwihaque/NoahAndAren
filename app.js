@@ -6,6 +6,16 @@ const app = express();
 app.use(helmet());
 app.use(authRouter);
 
+app.use((err,req,res,next) => {
+    if(err){
+        console.log(err.statusCode);
+        res.status(500).json({
+            message: 'Error',
+            error: err.message
+        })
+    }
+})
+
 app.listen(process.env.port || 3000);
 
 
