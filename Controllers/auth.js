@@ -7,10 +7,23 @@ export const signUpHandler = async (req, res, next) => {
     const lastName = req.body.lastName;
     const relationship = req.body.relationship;
     try{
-        const user = await User.findOne({email});
+        let user = await User.findOne({email});
         if(user){
+            console.log('User exists');
             throw new Error('User already exists');
         }
+        const hp = await bcrypt.hash(password, 12);
+       user = new User({
+           email,
+           password: hp,
+           firstName: firstName,
+           lastName: lastName,
+           posts:[],
+           tag: [],
+           relationship: relationship
+       });
+
+       await user.save();
 
     }
     catch (e) {
