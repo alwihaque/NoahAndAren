@@ -2,6 +2,7 @@ import User from "../Models/User.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import pick from 'lodash/pick.js';
+import config from 'config';
 export const signUpHandler = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -19,7 +20,7 @@ export const signUpHandler = async (req, res) => {
     await user.save();
     const token = jwt.sign({
         userId: user._id,
-    },process.env.JWT,{expiresIn: '1h'});
+    },config.get('connection-config.JWT'),{expiresIn: '1h'});
     res.status(201).header('x-jwt', token).json({
         message: 'User Successfully Created',
         user: pick(user, ['email','_id'])
@@ -43,7 +44,7 @@ export const signInHandler = async (req,res) => {
     }
     const token = await jwt.sign({
         userId: user._id
-    }, process.env.JWT,{expiresIn: '1h'});
+    }, config.get('connection-config.JWT'),{expiresIn: '1h'});
     res.status(200).header('x-jwt', token).json({
         message: 'User Logged In',
         user: pick(user, ['email','_id'])
