@@ -1,10 +1,12 @@
 import {Router} from "express";
-import {signUpHandler} from "../Controllers/auth.js";
+import {signInHandler, signUpHandler} from "../Controllers/auth.js";
+import tryCatchHandler from '../Middleware/tryCatch.js';
 
 const router = Router();
 
 
-router.post('/sign-up',signUpHandler);
+router.post('/sign-up',tryCatchHandler(signUpHandler));
+router.post('/sign-in',tryCatchHandler(signInHandler));
 
 
 
