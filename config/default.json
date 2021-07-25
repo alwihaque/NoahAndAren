@@ -1,7 +1,0 @@
-{
-  "connection-config": {
-    "MONGO_URI": "mongodb+srv://alwihaque:alwi1234@cluster0.meimk.mongodb.net/testDB?retryWrites=true&w=majority",
-    "PORT": "3000",
-    "JWT": "somesecret"
-  }
-}
