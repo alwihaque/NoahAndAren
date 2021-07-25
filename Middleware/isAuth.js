@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import config from 'config';
 
-const isAuth = (req, res, next) => {
+export const isAuth = (req, res, next) => {
 const token = req.header('x-jwt');
 if(!token) {
     const error = new Error('Not Authorized');
@@ -10,6 +10,7 @@ if(!token) {
 }
 try{
     req.user = jwt.verify(token, config.get('connection-config.JWT'));
+    next();
 }
 catch (e) {
     if(!e.statusCode){
