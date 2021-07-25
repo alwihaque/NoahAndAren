@@ -50,4 +50,4 @@ export const signInHandler = async (req,res) => {
         user: pick(user, ['email','_id'])
     });
 
-}
+};
