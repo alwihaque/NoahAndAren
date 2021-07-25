@@ -1,5 +1,6 @@
 import express from 'express';
 import config from 'config';
+import multer from 'multer';
 import dbConnectionHandler from "./Init/dbConnection.js";
 import routerHandler from './Init/routes.js';
 const MONGO_URI = config.get('connection-config.MONGO_URI');

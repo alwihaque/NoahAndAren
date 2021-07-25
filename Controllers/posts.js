@@ -20,3 +20,8 @@ export const getPostByOthers = async (req, res) => {
     console.log(req.params.id);
     res.send();
 }
+export const createPost = async (req, res) => {
+    const title = req.body.title;
+    const content = req.body.title;
+
+}
